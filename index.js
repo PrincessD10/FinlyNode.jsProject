@@ -9,6 +9,7 @@
 
 const express = require('express');
 const morgan = require('morgan');
+const userRouter = require('./routes/user.route');
 
 require('dotenv').config();
 require('./libs/dbConnect');
@@ -19,7 +20,12 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
+app.use('/users', userRouter);
 
+app.get('/', (req, res) => {
+  res.render('index', { message: 'Hello From Node.js' });
+  });
+  
 app.get('/', (req, res) => {
   res.render('index', { message: 'Hello From Node.js' });
 });
